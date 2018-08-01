@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hey, VSauce here!</title>
+</head>
+<body>
+  <h1>{{.}}</h1>
+</body>
+</html>
