@@ -7,7 +7,7 @@ import (
 	"path"
 	"strings"
 
-	w2b "webserver/w2buffer"
+	w2b "github.com/zhach/personalweb/w2buffer"
 )
 
 var (

@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"webserver/handlers"
+	"github.com/zhach/personalweb/handlers"
 )
 
 var (
