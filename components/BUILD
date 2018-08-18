@@ -1,3 +1,5 @@
+package(default_visibility = ["//personalweb:__pkg__"])
+
 load("@io_bazel_rules_closure//closure:defs.bzl", "web_library")
 load("//defs:vulcanize.bzl", "html_binary")
 

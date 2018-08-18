@@ -9,6 +9,14 @@ go_library(
 )
 
 go_library(
+    name = "datafiles",
+    srcs = [
+        "grab_datafiles.go",
+    ],
+    importpath = "github.com/zhach/personalweb/datafiles",
+)
+
+go_library(
     name = "handlers",
     srcs = [
         "handlers.go",
@@ -24,7 +32,27 @@ go_binary(
     srcs = [
         "main.go"
     ],
+    data = [
+        ":webfiles.zip",
+    ],
     deps = [
         ":handlers",
+        ":datafiles",
     ],
+)
+
+load("//defs:zipper.bzl", "zip_file")
+zip_file(
+    name = "webfiles",
+    deps = [":assets"],
+)
+
+# Bring in assets into top directory
+load("@io_bazel_rules_closure//closure:defs.bzl", "web_library")
+web_library(
+  name = "assets",
+  srcs = [
+    "//personalweb/components:index.html",
+  ],
+  path = "/",
 )

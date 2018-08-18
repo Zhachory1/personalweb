@@ -3,17 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
-	"html/template"
+	"log"
 	"net/http"
 
+	"github.com/zhach/personalweb/datafiles"
 	"github.com/zhach/personalweb/handlers"
 )
 
 var (
 	port = flag.Int("port", 8080, "port to server this web server on")
-	dir  = flag.String("dir", "", "directory that contains all the template files")
-	t    *template.Template
-	err  error
 )
 
 //TODO(zhach): Handle multiple connections
@@ -23,20 +21,20 @@ var (
 //TODO(zhach): 404 page, you idiot
 func Init() {
 	// Parsing static files into a template.
-	handlers.Init(*dir)
-	http.HandleFunc("/", handlers.HandleIndex)
+	// The datafiles function will return the entire zip file path for
+	// the compiled webfiles.
+	h := &handlers.Handlers{}
+	h.Init(datafiles.GetDataFilesPath("webfiles.zip"))
+	http.HandleFunc("/", h.HandleIndex)
 }
 
 func main() {
 	flag.Parse()
-	if *dir == "" {
-		panic("--dir flag cannot be empty.")
-	}
 	Init()
-	fmt.Print(
+	log.Print(
 		fmt.Sprintf(
 			"\n\nWeb server now serving on http://localhost:%v...\n\n", *port))
 	if err := http.ListenAndServe(fmt.Sprintf(":%v", *port), nil); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }

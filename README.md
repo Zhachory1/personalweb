@@ -39,7 +39,9 @@ You can also just run any web_library/html_binary to spin up a simple webserver 
 please run //personalweb/components:index
 ```
 
-Finally, run the server with 2 optional flags, port and dir. Port defines the port the webserver will look at for requests. Dir is the flag that defines where the static files are placed.
+Finally, run the server with an optional flags, port. Port defines the port the webserver will look at for requests. 
 
-TODO(zhachory1): Build rule to combine assets into server.
+```bash
+please run //personalweb:webserver
+```
 
